@@ -3,6 +3,8 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashSet;
@@ -38,5 +40,17 @@ public class HomeCtrl {
         return "index";
     }
 
-    @RequestMapping("/addalbum")
+    @PostMapping("/process")
+    public String process(@ModelAttribute("album") Album album, Model model) {
+        albumRepository.save(album);
+        return "redirect:/";
+    }
+
+    @RequestMapping("/newalbum")
+    public String newalbum(Model model) {
+        model.addAttribute("album", new Album());
+        return "newalbum";
+    }
+
+
 }
