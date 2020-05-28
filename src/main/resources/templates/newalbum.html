@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Album</title>
+</head>
+<body>
+<h2>New Album</h2>
+<form th:action="@{/process}" th:object="album" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    Name: <input type="text" th:field="*{name}"/>
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span> <br/>
+    Genre: <input type="text" th:field="*{genre}"/>
+    <span th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}"></span> <br/>
+    Year: <input type="number" th:field="*{year}"/>
+    <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></span> <br/>
+
+    <input type="submit" value="submit"/>
+</form>
+</body>
+</html>
